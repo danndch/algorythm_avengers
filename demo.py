@@ -23,23 +23,32 @@ import altair as alt
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.set_page_config(page_title="Plotting Demo", page_icon="📈")
 
-st.title("Images")
-
-
-image = Image.open(r'model_test.png')
-
-st.image(image)
-
+st.title("Algorithim Avengers")
 
 image1 = Image.open(r'purchased.png')
 
 st.image(image1)
 
 
-image2 = Image.open(r'grapht1.png')
 
-st.image(image2)
 
+
+
+st.title("Distributed Random Forest")
+
+
+image5 = Image.open(r'final_ye.png')
+st.image(image5)
+
+image7 = Image.open(r'yeeeet.png')
+st.image(image7)
+
+#image6 = Image.open(r'big_boi.png')
+#st.image(image6)
+
+#---------------------------------------------------------------------------------------------------------------
+st.title("Data Discrepencies")
+#---------------------------------------------------------------------------------------------------------------
 
 image3 = Image.open(r'output.png')
 
@@ -50,7 +59,40 @@ image4 = Image.open(r'output2.png')
 
 st.image(image4)
 
-st.write("With this model we were able to create a neural network.")
+
+image2 = Image.open(r'grapht1.png')
+
+st.image(image2)
+ 
+
+
+st.write("Calculates the number of rows that had a delivery date prior to the create date")
+st.code("""
+        
+original_count = len(koch)
+weird_dates_df = koch[koch['DELIVERY_DATE'] > koch['CREATE_DATE']]
+filtered_count = len(weird_dates_df)
+# Calculate the number of dropped rows
+dropped_count = original_count - filtered_count
+print(f"Number of rows dropped: {dropped_count}")  
+             
+""")
+
+st.write("Calculate the number of rows that had a delivery date that was early.")
+
+st.code("""
+original_count = len(koch)
+# Get tomorrow's date for comparison
+tomorrow = datetime.today().date() + timedelta(days=1)
+# Filter rows where 'DELIVERY_DATE' is tomorrow or in the future
+more_weird = koch[koch['DELIVERY_DATE'].dt.date <= tomorrow]
+# Get the count of the filtered rows
+more_weird_count = len(more_weird)
+# Calculate the number of rows dropped
+dropped_count_2 = original_count - more_weird_count
+print(f"Number of rows dropped: {dropped_count_2}")
+""")
+
 
 
 
@@ -436,8 +478,20 @@ y = koch['Time_Difference']
 
 """)
 
-st.title("Main Model")
 
+#---------------------------------------------------------------------------------------------------------------
+st.title("Subset Model")
+#---------------------------------------------------------------------------------------------------------------
+
+st.write("## Mean Absolute Error (MAE): 12.446554899726546")
+st.write("## Mean Squared Error (MSE): 1178.0400238236136")
+st.write("## R-squared Score: 0.295581301714428")
+
+
+
+image = Image.open(r'model_test.png')
+
+st.image(image)
 
 st.code("""
 import pandas as pd
@@ -691,10 +745,6 @@ print(f'Test Loss: {loss}')
 
 
 
-
-
-
-
 st.code("""
 
 
@@ -712,7 +762,3 @@ st.code("""
 
 
 
-
-st.write("Mean Absolute Error (MAE): 12.446554899726546")
-st.write("Mean Squared Error (MSE): 1178.0400238236136")
-st.write("R-squared Score: 0.295581301714428")
